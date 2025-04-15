@@ -86,7 +86,7 @@ public class Job {
     
     func calculateIncome(_ time: Int) -> Int {
         if case .Hourly(let double) = type {
-            return time * Int(double)
+            return Int(Double(time) * double)
         } else if case .Salary(let uInt) = type {
             return Int(uInt)
         }
@@ -131,7 +131,7 @@ public class Person {
     var job : Job? {
         set {
             if age > 15 {
-                self.job = newValue
+                self._job = newValue
             }
         } get {
             return self._job
@@ -140,7 +140,7 @@ public class Person {
     var spouse : Person? {
         set {
             if age > 15 {
-                self.spouse = newValue
+                self._spouse = newValue
             }
         } get {
             return self._spouse
@@ -183,4 +183,34 @@ public class Person {
 // Family
 //
 public class Family {
+    var members : [Person]
+    
+    init(spouse1 : Person, spouse2 : Person) {
+        self.members = []
+        if spouse1.spouse == nil && spouse2.spouse == nil {
+            spouse1.spouse = spouse2
+            spouse2.spouse = spouse1
+            self.members.append(spouse1)
+            self.members.append(spouse2)
+        }
+    }
+    
+    func haveChild(_ child : Person) -> Bool {
+        if members[0].age > 21 || members[1].age > 21 {
+            self.members.append(child)
+            return true
+        }
+        return false
+    }
+    
+    func householdIncome() -> Int {
+        var income = 0
+        for member in members {
+            if member.job != nil {
+                income += member.job!.calculateIncome(2000)
+            }
+        }
+        
+        return income
+    }
 }
