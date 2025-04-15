@@ -1,40 +1,40 @@
-//import XCTest
-//@testable import DomainModel
-//
-//class PersonTests: XCTestCase {
-//
-//    func testPerson() {
-//        let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
-//        XCTAssert(ted.toString() == "[Person: firstName:Ted lastName:Neward age:45 job:nil spouse:nil]")
-//    }
-//
-//    func testAgeRestrictions() {
-//        let matt = Person(firstName: "Matthew", lastName: "Neward", age: 15)
-//
-//        matt.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
-//        XCTAssert(matt.job == nil)
-//
-//        matt.spouse = Person(firstName: "Bambi", lastName: "Jones", age: 42)
-//        XCTAssert(matt.spouse == nil)
-//    }
-//
-//    func testAdultAgeRestrictions() {
-//        let mike = Person(firstName: "Michael", lastName: "Neward", age: 22)
-//
-//        mike.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
-//        XCTAssert(mike.job != nil)
-//
-//        mike.spouse = Person(firstName: "Bambi", lastName: "Jones", age: 42)
-//        XCTAssert(mike.spouse != nil)
-//    }
-//
-//    static var allTests = [
-//        ("testPerson", testPerson),
-//        ("testAgeRestrictions", testAgeRestrictions),
-//        ("testAdultAgeRestrictions", testAdultAgeRestrictions),
-//    ]
-//}
-//
+import XCTest
+@testable import DomainModel
+
+class PersonTests: XCTestCase {
+
+    func testPerson() {
+        let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
+        XCTAssert(ted.toString() == "[Person: firstName:Ted lastName:Neward age:45 job:nil spouse:nil]")
+    }
+
+    func testAgeRestrictions() {
+        let matt = Person(firstName: "Matthew", lastName: "Neward", age: 15)
+
+        matt.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
+        XCTAssert(matt.job == nil)
+
+        matt.spouse = Person(firstName: "Bambi", lastName: "Jones", age: 42)
+        XCTAssert(matt.spouse == nil)
+    }
+
+    func testAdultAgeRestrictions() {
+        let mike = Person(firstName: "Michael", lastName: "Neward", age: 22)
+
+        mike.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
+        XCTAssert(mike.job != nil)
+
+        mike.spouse = Person(firstName: "Bambi", lastName: "Jones", age: 42)
+        XCTAssert(mike.spouse != nil)
+    }
+
+    static var allTests = [
+        ("testPerson", testPerson),
+        ("testAgeRestrictions", testAgeRestrictions),
+        ("testAdultAgeRestrictions", testAdultAgeRestrictions),
+    ]
+}
+
 //class FamilyTests : XCTestCase {
 //  
 //    func testFamily() {

@@ -75,12 +75,89 @@ public class Job {
         case Hourly(Double)
         case Salary(UInt)
     }
+    
+    var title : String
+    var type : JobType
+    
+    init(title: String, type: JobType) {
+        self.title = title
+        self.type = type
+    }
+    
+    func calculateIncome(_ time: Int) -> Int {
+        if case .Hourly(let double) = type {
+            return time * Int(double)
+        } else if case .Salary(let uInt) = type {
+            return Int(uInt)
+        }
+        return 0
+    }
+    
+    func raise(byAmount amount: Int) {
+        if case .Hourly(let double) = type {
+            self.type = JobType.Hourly(double + Double(amount))
+        } else if case .Salary(let uInt) = type {
+            self.type = JobType.Salary(uInt + UInt(amount))
+        }
+    }
+    
+    func raise(byAmount amount: Double) {
+        if case .Hourly(let double) = type {
+            self.type = JobType.Hourly(double + amount)
+        } else if case .Salary(let uInt) = type {
+            self.type = JobType.Salary(uInt + UInt(amount))
+        }
+    }
+    
+    func raise(byPercent perc: Double) {
+        if case .Hourly(let double) = type {
+            self.type = JobType.Hourly(double + (double * Double(perc)))
+        } else if case .Salary(let amount) = type {
+            self.type = JobType.Salary(amount + UInt(Double(amount) * perc))
+        }
+    }
 }
 
 ////////////////////////////////////
 // Person
 //
 public class Person {
+    var firstName : String
+    var lastName : String
+    var age : Int
+    var job : Job?
+    var spouse : Person?
+    
+    init(firstName : String, lastName : String, age : Int) {
+        self.age = age
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+    
+    func toString() -> String{
+        var output = ""
+        output += "[Person: firstName:" + self.firstName
+        output += " lastName:" + self.lastName
+        output += " age:" + String(self.age)
+        
+        output += " job:"
+        if self.job == nil {
+            output += "nil"
+        } else if case .Hourly(let double) = job?.type {
+            output += "Hourly(" + String(double) + ")"
+        } else if case .Salary(let uInt) = job?.type {
+            output += "Salary(" + String(uInt) + ")"
+        }
+        
+        if spouse == nil {
+            output += " spouse:nil"
+        } else {
+            output += " spouse:" + spouse!.firstName
+        }
+    
+        output += "]"
+        return output
+    }
 }
 
 ////////////////////////////////////
