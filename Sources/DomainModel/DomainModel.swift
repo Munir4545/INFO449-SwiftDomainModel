@@ -125,8 +125,27 @@ public class Person {
     var firstName : String
     var lastName : String
     var age : Int
-    var job : Job?
-    var spouse : Person?
+    private var _job: Job?
+    private var _spouse: Person?
+    
+    var job : Job? {
+        set {
+            if age > 15 {
+                self.job = newValue
+            }
+        } get {
+            return self._job
+        }
+    }
+    var spouse : Person? {
+        set {
+            if age > 15 {
+                self.spouse = newValue
+            }
+        } get {
+            return self._spouse
+        }
+    }
     
     init(firstName : String, lastName : String, age : Int) {
         self.age = age
